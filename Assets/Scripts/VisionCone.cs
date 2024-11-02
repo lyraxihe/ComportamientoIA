@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VisionCone : MonoBehaviour
 {
@@ -13,8 +15,12 @@ public class VisionCone : MonoBehaviour
     public int VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
     Mesh VisionConeMesh;
     MeshFilter MeshFilter_;
-    //Create all of these variables, most of them are self explanatory, but for the ones that aren't i've added a comment to clue you in on what they do
-    //for the ones that you dont understand dont worry, just follow along
+    MeshCollider MeshCollider_;
+
+    // Conevision colors
+    Color PatrolColor = new Color(1, 1, 1, 0.7f);
+    Color ChaseColor = new Color(1, 0, 0, 0.7f);
+    Color SeekColor = new Color(1, 1, 0, 0.7f);
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +29,28 @@ public class VisionCone : MonoBehaviour
         MeshFilter_ = transform.AddComponent<MeshFilter>();
         VisionConeMesh = new Mesh();
         VisionAngle *= Mathf.Deg2Rad;
+        MeshCollider_ = gameObject.GetComponent<MeshCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         DrawVisionCone();//calling the vision cone function everyframe just so the cone is updated every frame
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            transform.GetComponent<MeshRenderer>().material.color = ChaseColor;
+            GetComponentInParent<EnemyBehaviour>().state = 1;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+            transform.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
     void DrawVisionCone()//this method creates the vision cone mesh
@@ -69,6 +91,7 @@ public class VisionCone : MonoBehaviour
         VisionConeMesh.vertices = Vertices;
         VisionConeMesh.triangles = triangles;
         MeshFilter_.mesh = VisionConeMesh;
+        MeshCollider_.sharedMesh = MeshFilter_.mesh;
     }
 
 }

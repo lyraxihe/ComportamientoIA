@@ -4,21 +4,42 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 100f; // Velocidad de movimiento del personaje
     private Rigidbody rb;
+    public float speed = 7f; // Velocidad de movimiento del personaje
+    public Transform orientation;
+    float horizontalInput;
+    float verticalInput;
+    Vector3 moveDirection;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); // Obtener el componente Rigidbody del personaje
+        // Obtener el componente Rigidbody del personaje
+        rb = GetComponent<Rigidbody>();
+        // Impide que el personaje gire y se pueda caer
+        rb.freezeRotation = true;
     }
 
     void Update()
     {
-
-        // Crear un vector de movimiento
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-
-        // Mover al personaje
-        rb.MovePosition(transform.position + movement * speed * Time.deltaTime);
+        MyInput();
     }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    private void MyInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+    }
+
+    private void MovePlayer()
+    {
+        // calculate movement direction
+        moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
+        rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+    }
+
 }
