@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     public Transform player;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private int currentWaypoint = 0;
     [SerializeField] GameObject[] waypoints;
+    private float originalSpeed;
+    public Vector3 lastPositionPlayer;
+    [SerializeField] GameObject coneVision;
 
     //State
     public int state; // 0 - Patrol | 1 - Chase | 2 - Seek
@@ -19,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.destination = waypoints[currentWaypoint].transform.position;
         state = 0;
+        originalSpeed = agent.speed;
     }
 
     void Update()
@@ -31,6 +36,9 @@ public class EnemyBehaviour : MonoBehaviour
                 break;
             case 1:
                 Chase();
+                break;
+            case 2:
+                Seek();
                 break;
         }
 
@@ -52,6 +60,22 @@ public class EnemyBehaviour : MonoBehaviour
     private void Chase()
     {
         agent.destination = player.transform.position;
+        if (agent.speed == originalSpeed)
+            agent.speed += 4;
+    }
+
+    private void Seek()
+    {
+        agent.destination = lastPositionPlayer;
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            coneVision.transform.GetComponent<MeshRenderer>().material.color = coneVision.GetComponent<VisionCone>().PatrolColor;
+            agent.destination = waypoints[currentWaypoint].transform.position;
+            if (agent.remainingDistance <= agent.stoppingDistance)
+                state = 0;
+        }
+
     }
 
 }

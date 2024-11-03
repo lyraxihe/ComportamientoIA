@@ -631,6 +631,14 @@ PrefabInstance:
       propertyPath: VisionRange
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5381944620175877719, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381944620175877719, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5463897796405895204, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_Speed
       value: 4
@@ -934,6 +942,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1770512055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &524797298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524797299}
+  - component: {fileID: 524797300}
+  m_Layer: 0
+  m_Name: Sound
+  m_TagString: PlayerSoundCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524797299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524797298}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1931134823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &524797300
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524797298}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &543071215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,8 +2312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2fcc09602804643b522d7728e2988f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  originalSpeed: 7
+  sprintSpeed: 5
+  currentSpeed: 0
   orientation: {fileID: 0}
+  playerSound: {fileID: 524797298}
 --- !u!4 &1931134823
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,6 +2331,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 198356304}
+  - {fileID: 524797299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1931134824
@@ -2608,6 +2673,10 @@ PrefabInstance:
     - target: {fileID: 4249934221931352369, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: VisionRange
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381944620175877719, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5463897796405895204, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_Enabled

@@ -18,9 +18,9 @@ public class VisionCone : MonoBehaviour
     MeshCollider MeshCollider_;
 
     // Conevision colors
-    Color PatrolColor = new Color(1, 1, 1, 0.7f);
-    Color ChaseColor = new Color(1, 0, 0, 0.7f);
-    Color SeekColor = new Color(1, 1, 0, 0.7f);
+    public Color PatrolColor = new Color(1, 1, 1, 0.7f);
+    public Color ChaseColor = new Color(1, 0, 0, 0.7f);
+    public Color SeekColor = new Color(1, 1, 0, 0.7f);
 
     // Start is called before the first frame update
     void Start()
