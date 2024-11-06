@@ -22,6 +22,8 @@ public class VisionCone : MonoBehaviour
     public Color ChaseColor = new Color(1, 0, 0, 0.7f);
     public Color SeekColor = new Color(1, 1, 0, 0.7f);
 
+    public LayerMask playerLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,15 @@ public class VisionCone : MonoBehaviour
         VisionConeMesh = new Mesh();
         VisionAngle *= Mathf.Deg2Rad;
         MeshCollider_ = gameObject.GetComponent<MeshCollider>();
+        InvokeRepeating("DrawVisionCone", 0.1f, 0.1f);
+        InvokeRepeating("DetectPlayer", 0.1f, 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        DrawVisionCone();//calling the vision cone function everyframe just so the cone is updated every frame
+        //DrawVisionCone();//calling the vision cone function everyframe just so the cone is updated every frame
+        //DetectPlayer();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,6 +50,19 @@ public class VisionCone : MonoBehaviour
             transform.GetComponent<MeshRenderer>().material.color = ChaseColor;
             GetComponentInParent<EnemyBehaviour>().state = 1;
         }
+    }
+
+    void DetectPlayer()
+    {
+        Ray ray = new Ray();
+        ray.origin = transform.position;
+        ray.direction = transform.forward;
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, VisionRange))
+        {
+            if (hitInfo.collider.gameObject.layer == playerLayer)
+                print("Player");
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
