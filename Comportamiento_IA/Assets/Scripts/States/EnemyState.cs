@@ -1,0 +1,5 @@
+
+namespace ComportamientoIA.Runtime.State
+{
+    
+}
