@@ -1,5 +1,6 @@
 
 using ComportamientoIA.Runtime.Managers;
+using ComportamientoIA.Runtime.State;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,32 +11,38 @@ using UnityEngine.AI;
 public class VisionCone : MonoBehaviour
 {
     
-    public Material VisionConeMaterial;
-    public float VisionRange;
-    public float VisionAngle;
+    public Material  VisionConeMaterial;
+    public float     VisionRange;
+    public float     VisionAngle;
     public LayerMask VisionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
-    public int VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
+    public int       VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
 
     // Conevision colors
     public Color PatrolColor = new Color(1, 1, 1, 0.7f);
-    public Color ChaseColor = new Color(1, 0, 0, 0.7f);
-    public Color SeekColor = new Color(1, 1, 0, 0.7f);
+    public Color ChaseColor  = new Color(1, 0, 0, 0.7f);
+    public Color SeekColor   = new Color(1, 1, 0, 0.7f);
 
     public LayerMask playerLayer;
 
-    private Mesh VisionConeMesh;
-    private MeshFilter MeshFilter_;
-    private MeshCollider MeshCollider_;
+    public  MeshRenderer   _MeshRenderer;
+
+    private Mesh           VisionConeMesh;
+    private MeshFilter     _MeshFilter;
+    private MeshCollider   _MeshCollider;
+    private EnemyBehaviour _controller;
 
     // Start is called before the first frame update
     void Start()
     {
+        _controller = GetComponentInParent<EnemyBehaviour>();
+        
         transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
 
-        MeshFilter_    =  transform.AddComponent<MeshFilter>();
+        _MeshFilter    =  transform.AddComponent<MeshFilter>();
         VisionConeMesh =  new Mesh();
         VisionAngle    *= Mathf.Deg2Rad;
-        MeshCollider_  =  gameObject.GetComponent<MeshCollider>();
+        _MeshCollider  =  this.GetComponent<MeshCollider>();
+        _MeshRenderer  =  this.GetComponent<MeshRenderer>();
 
         InvokeRepeating("DrawVisionCone", 0.1f, 0.1f);
         InvokeRepeating("DetectPlayer", 0.1f, 0.1f);
@@ -51,10 +58,13 @@ public class VisionCone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Player")
-        {
-            transform.GetComponent<MeshRenderer>().material.color = ChaseColor;
-            GetComponentInParent<EnemyBehaviour>().state          = 1;
-        }
+            _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+            transform.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
     void DetectPlayer()
@@ -67,12 +77,6 @@ public class VisionCone : MonoBehaviour
             if (hitInfo.collider.gameObject.layer == playerLayer)
                 print("Player");
 
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "Player")
-            transform.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
     void DrawVisionCone()//this method creates the vision cone mesh
@@ -112,9 +116,13 @@ public class VisionCone : MonoBehaviour
 
         VisionConeMesh.vertices  = Vertices;
         VisionConeMesh.triangles = triangles;
-        MeshFilter_.mesh         = VisionConeMesh;
-        MeshCollider_.sharedMesh = MeshFilter_.mesh;
+        _MeshFilter.mesh         = VisionConeMesh;
+        _MeshCollider.sharedMesh = _MeshFilter.mesh;
     }
 
+    public void changeColorTo(Color color)
+    {
+        _MeshRenderer.material.color = color;
+    }
 }
 

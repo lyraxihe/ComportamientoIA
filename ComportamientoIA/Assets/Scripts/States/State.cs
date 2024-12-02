@@ -12,7 +12,7 @@ namespace FiniteStateMachineLibrary.States
             this._finiteStateMachine = finiteStateMachine;
         }
 
-        //public abstract void OnEnter();
+        public abstract void OnEnter();
 
         public abstract void DoState();
 

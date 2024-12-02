@@ -236,18 +236,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisionConeMaterial: {fileID: 2100000, guid: cd86cb3b1ed3c954790b4538cbd8fb6d, type: 2}
-  VisionRange: 0
-  VisionAngle: 0
+  VisionRange: 20
+  VisionAngle: 120
   VisionObstructingLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   VisionConeResolution: 120
   PatrolColor: {r: 1, g: 1, b: 1, a: 0.7}
   ChaseColor: {r: 1, g: 0, b: 0, a: 0.7}
   SeekColor: {r: 1, g: 1, b: 0, a: 0.7}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  _MeshRenderer: {fileID: 0}
 --- !u!64 &3002658522677320710
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -389,9 +390,8 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 0}
   lastPositionPlayer: {x: 0, y: 0, z: 0}
+  visionCone: {fileID: 8681591420501163977}
   waypoints: []
-  coneVision: {fileID: 5929411390786245826}
-  state: 0
 --- !u!195 &5463897796405895204
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 
+using ComportamientoIA.Runtime.State;
 using FiniteStateMachineLibrary.Managers;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,35 +11,40 @@ namespace ComportamientoIA.Runtime.Managers
 {
     public class EnemyBehaviour : MonoBehaviour
     {
-        public Transform    player;
-        public NavMeshAgent agent;
-        public Vector3      lastPositionPlayer;
+        public Transform          player;
+        public NavMeshAgent       agent;
+        public Vector3            lastPositionPlayer;
+        public FiniteStateMachine _finiteStateMachine;
+        public VisionCone         visionCone;
+        public GameObject[]       waypoints;
+        public int                currentWaypoint = 0;
+        public float              originalSpeed;
 
-        [SerializeField] GameObject[] waypoints;
-        [SerializeField] GameObject   coneVision;
-
-        private FiniteStateMachine _finiteStateMachine;
-        private int                currentWaypoint = 0;
-        private float              originalSpeed;
-
-        //State
-        public int state; // 0 - Patrol | 1 - Chase | 2 - Seek
+        private void Awake()
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
 
         void Start()
         {
             this._finiteStateMachine = new EnemyFiniteStateMachine(this);
+            player                   = GameObject.Find("Player").GetComponent<Transform>();
+            originalSpeed            = agent.speed;
+        }
 
-            player = GameObject.Find("Player").GetComponent<Transform>();
-            agent  = GetComponent<NavMeshAgent>();
-
-            agent.destination = waypoints[currentWaypoint].transform.position;
-            state             = 0;
-            originalSpeed     = agent.speed;
+        private void Update()
+        {
+            UpdateMachine();
         }
 
         private void UpdateMachine()
         {
             this._finiteStateMachine.UpdateMachine();
+        }
+
+        public void ChangeStateTo(FiniteStateMachineLibrary.States.State state)
+        {
+            this._finiteStateMachine.ChangeToState(state);
         }
 
         public void Patrol()
@@ -57,26 +63,13 @@ namespace ComportamientoIA.Runtime.Managers
         public void Chase()
         {
             agent.destination = player.transform.position;
-            
-            if (agent.speed == originalSpeed)
-                agent.speed += 4;
         }
 
         public void Seek()
         {
-            agent.destination = lastPositionPlayer;
-
             if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                coneVision.transform.GetComponent<MeshRenderer>().material.color = coneVision.GetComponent<VisionCone>().PatrolColor;
-                
-                agent.destination = waypoints[currentWaypoint].transform.position;
-                
                 if (agent.remainingDistance <= agent.stoppingDistance)
-                    state = 0;
-            }
-
+                    ChangeStateTo(new PatrolState(this._finiteStateMachine, this));
         }
-
     }
 }

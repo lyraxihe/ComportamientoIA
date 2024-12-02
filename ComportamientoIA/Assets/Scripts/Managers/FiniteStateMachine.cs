@@ -12,11 +12,17 @@ namespace FiniteStateMachineLibrary.Managers
             this._currentState?.DoState();
         }
 
+        public State getCurrentState()
+        {
+            return _currentState;
+        }
+
         public void ChangeToState(State state)
         {
             //this._currentState?.OnExit();
             this._currentState = state;
-            //this._currentState?.OnEnter();
+            this._currentState?.OnEnter();
         }
+
     }
 }
