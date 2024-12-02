@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FiniteStateMachineLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19b30f384833439f507569360a0aed87bb9da1b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+658bdefed88ef5764ab37027bce1f75a3d81c5b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("FiniteStateMachineLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FiniteStateMachineLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
