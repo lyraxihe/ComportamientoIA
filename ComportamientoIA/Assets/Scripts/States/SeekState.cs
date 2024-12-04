@@ -17,7 +17,9 @@ namespace ComportamientoIA.Runtime.State
 
         public override void DoState()
         {
-            this._controller.Seek();
+            if (_controller.agent.remainingDistance <= _controller.agent.stoppingDistance)
+                if (_controller.agent.remainingDistance <= _controller.agent.stoppingDistance)
+                    _controller.ChangeStateTo(new PatrolState(this._finiteStateMachine, _controller));
         }
     }
 }

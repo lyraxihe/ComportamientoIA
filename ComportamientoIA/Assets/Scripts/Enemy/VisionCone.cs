@@ -44,15 +44,7 @@ public class VisionCone : MonoBehaviour
         _MeshCollider  =  this.GetComponent<MeshCollider>();
         _MeshRenderer  =  this.GetComponent<MeshRenderer>();
 
-        InvokeRepeating("DrawVisionCone", 0.1f, 0.1f);
-        InvokeRepeating("DetectPlayer", 0.1f, 0.1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //DrawVisionCone();//calling the vision cone function everyframe just so the cone is updated every frame
-        //DetectPlayer();
+        InvokeRepeating("DrawVisionCone", 0.1f, 0.2f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,19 +59,7 @@ public class VisionCone : MonoBehaviour
             transform.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
-    void DetectPlayer()
-    {
-        Ray ray       = new Ray();
-        ray.origin    = transform.position;
-        ray.direction = transform.forward;
-
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, VisionRange))
-            if (hitInfo.collider.gameObject.layer == playerLayer)
-                print("Player");
-
-    }
-
-    void DrawVisionCone()//this method creates the vision cone mesh
+    void DrawVisionCone()
     {
         int[]     triangles     = new int[(VisionConeResolution - 1) * 3];
         Vector3[] Vertices      = new Vector3[VisionConeResolution + 1];

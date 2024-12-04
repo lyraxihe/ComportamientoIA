@@ -19,7 +19,7 @@ namespace ComportamientoIA.Runtime.State
 
         public override void DoState()
         {
-            this._controller.Chase();
+            _controller.agent.destination = _controller.player.transform.position;
         }
     }
 }

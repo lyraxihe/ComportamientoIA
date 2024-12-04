@@ -2,6 +2,7 @@
 using FiniteStateMachineLibrary.Managers;
 using ComportamientoIA.Runtime.Managers;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ComportamientoIA.Runtime.State
 {
@@ -17,7 +18,35 @@ namespace ComportamientoIA.Runtime.State
 
         public override void DoState()
         {
-            this._controller.Patrol();
+            if (_controller.agent.remainingDistance <= _controller.agent.stoppingDistance)
+            {
+                _controller.currentWaypoint++;
+
+                if (_controller.currentWaypoint >= _controller.waypoints.Length)
+                    _controller.currentWaypoint = 0;
+
+                _controller.agent.destination = _controller.waypoints[_controller.currentWaypoint].transform.position;
+            }
+            if (IsSeeingPlayer())
+            {
+                _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
+                Debug.Log("es´sañ changeando a perseguir");
+            }
+        }
+
+        private bool IsSeeingPlayer()
+        {
+            Debug.Log("entra A LAFUNCION");
+            if (Vector3.Distance(_controller.transform.position, _controller.player.position) < _controller.visionCone.VisionRange)
+                return false;
+
+            Vector3 directionToPlayer       = (_controller.player.position - _controller.transform.position).normalized;
+            double  angleBetweenEnemyPlayer = Vector3.Angle(_controller.transform.forward, directionToPlayer);
+
+            if (!(angleBetweenEnemyPlayer < (_controller.visionCone.VisionAngle * 0.5)))
+                return false;
+
+            return Physics.Raycast(_controller.transform.position, directionToPlayer, _controller.visionCone.VisionRange, _controller.visionCone.VisionObstructingLayer);
         }
     }
 }
