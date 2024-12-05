@@ -14,6 +14,7 @@ public class VisionCone : MonoBehaviour
     public Material  VisionConeMaterial;
     public float     VisionRange;
     public float     VisionAngle;
+    public float     VisionRadAngle;
     public LayerMask VisionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
     public int       VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
 
@@ -31,7 +32,6 @@ public class VisionCone : MonoBehaviour
     private MeshCollider   _MeshCollider;
     private EnemyBehaviour _controller;
 
-    // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponentInParent<EnemyBehaviour>();
@@ -40,17 +40,11 @@ public class VisionCone : MonoBehaviour
 
         _MeshFilter    =  transform.AddComponent<MeshFilter>();
         VisionConeMesh =  new Mesh();
-        VisionAngle    *= Mathf.Deg2Rad;
+        VisionRadAngle =  VisionAngle * Mathf.Deg2Rad;
         _MeshCollider  =  this.GetComponent<MeshCollider>();
         _MeshRenderer  =  this.GetComponent<MeshRenderer>();
 
-        InvokeRepeating("DrawVisionCone", 0.1f, 0.2f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "Player")
-            _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
+        InvokeRepeating(nameof(DrawVisionCone), 0.1f, 0.2f);
     }
 
     private void OnTriggerExit(Collider other)
@@ -64,8 +58,8 @@ public class VisionCone : MonoBehaviour
         int[]     triangles     = new int[(VisionConeResolution - 1) * 3];
         Vector3[] Vertices      = new Vector3[VisionConeResolution + 1];
         Vertices[0]             = Vector3.zero;
-        float     Currentangle  = -VisionAngle / 2;
-        float     angleIcrement = VisionAngle / (VisionConeResolution - 1);
+        float     Currentangle  = -VisionRadAngle / 2;
+        float     angleIcrement = VisionRadAngle / (VisionConeResolution - 1);
         float     Sine;
         float     Cosine;
 

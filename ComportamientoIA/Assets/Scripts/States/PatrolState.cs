@@ -28,16 +28,16 @@ namespace ComportamientoIA.Runtime.State
                 _controller.agent.destination = _controller.waypoints[_controller.currentWaypoint].transform.position;
             }
             if (IsSeeingPlayer())
-            {
                 _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
-                Debug.Log("es´sañ changeando a perseguir");
-            }
+
+            //if (IsHearingPlayer())
+            //    _controller.ChangeStateTo(new SeekState(_controller._finiteStateMachine, _controller));
+
         }
 
-        private bool IsSeeingPlayer()
+        public bool IsSeeingPlayer()
         {
-            Debug.Log("entra A LAFUNCION");
-            if (Vector3.Distance(_controller.transform.position, _controller.player.position) < _controller.visionCone.VisionRange)
+            if (Vector3.Distance(_controller.transform.position, _controller.player.position) > _controller.visionCone.VisionRange)
                 return false;
 
             Vector3 directionToPlayer       = (_controller.player.position - _controller.transform.position).normalized;
@@ -46,7 +46,15 @@ namespace ComportamientoIA.Runtime.State
             if (!(angleBetweenEnemyPlayer < (_controller.visionCone.VisionAngle * 0.5)))
                 return false;
 
-            return Physics.Raycast(_controller.transform.position, directionToPlayer, _controller.visionCone.VisionRange, _controller.visionCone.VisionObstructingLayer);
+            return Physics.Raycast(_controller.transform.position, directionToPlayer, _controller.visionCone.VisionRange, _controller.visionCone.VisionObstructingLayer); //no está funcionando la layerMask
         }
+        
+        //public bool IsHearingPlayer()
+        //{
+        //    if (_controller.isHearingPlayer)
+        //        return true;
+        //    else 
+        //        return false;
+        //}
     }
 }

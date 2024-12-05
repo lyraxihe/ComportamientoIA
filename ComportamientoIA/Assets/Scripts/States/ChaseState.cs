@@ -20,6 +20,9 @@ namespace ComportamientoIA.Runtime.State
         public override void DoState()
         {
             _controller.agent.destination = _controller.player.transform.position;
+            //if (!IsSeeingPlayer())
+            //    _controller.ChangeStateTo(new PatrolState(_controller._finiteStateMachine, _controller));
+
         }
     }
 }
