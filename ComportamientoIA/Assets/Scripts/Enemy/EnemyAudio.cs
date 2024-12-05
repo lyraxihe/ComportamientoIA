@@ -16,7 +16,7 @@ public class EnemyAudio : MonoBehaviour
         _controller = GetComponentInParent<EnemyBehaviour>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "PlayerSoundCollider" && _controller._finiteStateMachine.getCurrentState() is not ChaseState)
         {

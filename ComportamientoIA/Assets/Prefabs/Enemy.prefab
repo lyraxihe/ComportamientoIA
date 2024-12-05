@@ -238,6 +238,7 @@ MonoBehaviour:
   VisionConeMaterial: {fileID: 2100000, guid: cd86cb3b1ed3c954790b4538cbd8fb6d, type: 2}
   VisionRange: 20
   VisionAngle: 120
+  VisionRadAngle: 0
   VisionObstructingLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -392,6 +393,8 @@ MonoBehaviour:
   lastPositionPlayer: {x: 0, y: 0, z: 0}
   visionCone: {fileID: 8681591420501163977}
   waypoints: []
+  currentWaypoint: 0
+  originalSpeed: 0
 --- !u!195 &5463897796405895204
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -406,7 +409,7 @@ NavMeshAgent:
   m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 60
-  m_StoppingDistance: 0.09
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
