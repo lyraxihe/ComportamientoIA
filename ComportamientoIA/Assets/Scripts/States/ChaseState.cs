@@ -15,14 +15,14 @@ namespace ComportamientoIA.Runtime.State
                 this._controller.agent.speed += 4;
 
             this._controller.visionCone.changeColorTo(this._controller.visionCone.ChaseColor);
+            _controller.visionCone.ChaseSeekStateRange();
         }
 
         public override void DoState()
         {
             _controller.agent.destination = _controller.player.transform.position;
-            //if (!IsSeeingPlayer())
-            //    _controller.ChangeStateTo(new PatrolState(_controller._finiteStateMachine, _controller));
-
+            if (!IsSeeingPlayer() && !IsHearingPlayer())
+                _controller.ChangeStateTo(new PatrolState(_controller._finiteStateMachine, _controller));
         }
     }
 }

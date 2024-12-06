@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             currentSpeed = originalSpeed;
-            playerSound.GetComponent<SphereCollider>().radius = 1f;
+            playerSound.GetComponent<SphereCollider>().radius = 3f;
         }
     }
 

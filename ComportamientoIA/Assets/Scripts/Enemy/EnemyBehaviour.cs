@@ -19,7 +19,8 @@ namespace ComportamientoIA.Runtime.Managers
         public GameObject[]       waypoints;
         public int                currentWaypoint = 0;
         public float              originalSpeed;
-        //public bool               isHearingPlayer;
+        public bool               isHearingPlayer;
+
 
         private void Awake()
         {
@@ -44,15 +45,6 @@ namespace ComportamientoIA.Runtime.Managers
         {
             this._finiteStateMachine.ChangeToState(state);
         }
-
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    isHearingPlayer    = (other.transform.tag == "PlayerSoundCollider") ? true : false;
-        //    if (isHearingPlayer)
-        //    {
-        //        lastPositionPlayer = other.transform.position;
-        //    }
-        //}
 
     }
 }

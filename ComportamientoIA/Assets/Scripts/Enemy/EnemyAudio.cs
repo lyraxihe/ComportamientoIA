@@ -3,6 +3,7 @@ using ComportamientoIA.Runtime.Managers;
 using ComportamientoIA.Runtime.State;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAudio : MonoBehaviour
@@ -11,6 +12,7 @@ public class EnemyAudio : MonoBehaviour
 
     private EnemyBehaviour _controller;
 
+
     private void Start()
     {
         _controller = GetComponentInParent<EnemyBehaviour>();
@@ -18,10 +20,19 @@ public class EnemyAudio : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "PlayerSoundCollider" && _controller._finiteStateMachine.getCurrentState() is not ChaseState)
+        if (other.transform.tag == "PlayerSoundCollider")
         {
             _controller.lastPositionPlayer = other.transform.position;
-            _controller.ChangeStateTo(new SeekState(_controller._finiteStateMachine, _controller));
+            _controller.isHearingPlayer = true;
+        }
+                
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.transform.tag == "PlayerSoundCollider")
+        {
+            _controller.isHearingPlayer = false;
         }
     }
 }

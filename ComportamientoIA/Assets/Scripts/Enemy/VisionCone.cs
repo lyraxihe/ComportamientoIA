@@ -47,11 +47,11 @@ public class VisionCone : MonoBehaviour
         InvokeRepeating(nameof(DrawVisionCone), 0.1f, 0.2f);
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "Player")
-            transform.GetComponent<MeshRenderer>().material.color = Color.blue;
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.transform.tag == "Player")
+    //        transform.GetComponent<MeshRenderer>().material.color = Color.blue;
+    //}
 
     void DrawVisionCone()
     {
@@ -97,6 +97,18 @@ public class VisionCone : MonoBehaviour
     public void changeColorTo(Color color)
     {
         _MeshRenderer.material.color = color;
+    }
+
+    public void ChaseSeekStateRange()
+    {
+        VisionRange = 40;
+        VisionAngle = 250;
+}
+
+    public void PatrolStateRange()
+    {
+        VisionRange = 20;
+        VisionAngle = 120;
     }
 }
 

@@ -13,19 +13,15 @@ namespace ComportamientoIA.Runtime.State
         {
             this._controller.agent.destination = this._controller.lastPositionPlayer;
             this._controller.visionCone.changeColorTo(this._controller.visionCone.SeekColor);
+            _controller.visionCone.ChaseSeekStateRange();
         }
 
         public override void DoState()
         {
-            if (_controller.agent.remainingDistance <= _controller.agent.stoppingDistance)
-                if (_controller.agent.remainingDistance <= _controller.agent.stoppingDistance)
-                    _controller.ChangeStateTo(new PatrolState(this._finiteStateMachine, _controller));
-
-            //if ((_controller.agent.remainingDistance <= _controller.agent.stoppingDistance) && !IsSeeingPlayer())
-            //    _controller.ChangeStateTo(new PatrolState(this._finiteStateMachine, _controller));
-            //else if (IsSeeingPlayer())
-            //_controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
-
+            if ((_controller.agent.remainingDistance <= _controller.agent.stoppingDistance))
+                _controller.ChangeStateTo(new PatrolState(this._finiteStateMachine, _controller));
+            else if (IsSeeingPlayer())
+                _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
         }
 
     }
