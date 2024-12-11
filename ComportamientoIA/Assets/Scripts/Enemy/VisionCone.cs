@@ -14,6 +14,8 @@ public class VisionCone : MonoBehaviour
     public Material  VisionConeMaterial;
     public float     VisionRange;
     public float     VisionAngle;
+    public float     PatrolVisionRange;
+    public float     PatrolVisionAngle;
     public float     VisionRadAngle;
     public LayerMask VisionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
     public int       VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
@@ -46,12 +48,6 @@ public class VisionCone : MonoBehaviour
 
         InvokeRepeating(nameof(DrawVisionCone), 0.1f, 0.2f);
     }
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.transform.tag == "Player")
-    //        transform.GetComponent<MeshRenderer>().material.color = Color.blue;
-    //}
 
     void DrawVisionCone()
     {
@@ -101,14 +97,14 @@ public class VisionCone : MonoBehaviour
 
     public void ChaseSeekStateRange()
     {
-        VisionRange = 40;
-        VisionAngle = 250;
-}
+        VisionRange = PatrolVisionRange * 2;
+        VisionAngle = PatrolVisionAngle * 2;
+    }
 
     public void PatrolStateRange()
     {
-        VisionRange = 20;
-        VisionAngle = 120;
+        VisionRange = PatrolVisionRange;
+        VisionAngle = PatrolVisionAngle;
     }
 }
 

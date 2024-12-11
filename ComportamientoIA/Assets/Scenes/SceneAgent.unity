@@ -695,6 +695,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.354
       objectReference: {fileID: 0}
+    - target: {fileID: 8681591420501163977, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: PatrolVisionAngle
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681591420501163977, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: PatrolVisionRange
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 9074057926195354486, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17
@@ -1021,7 +1029,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &543071215
 GameObject:
@@ -2757,6 +2765,14 @@ PrefabInstance:
     - target: {fileID: 8170608644862474066, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681591420501163977, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: PatrolVisionAngle
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681591420501163977, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: PatrolVisionRange
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9074057926195354486, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_LocalPosition.x
