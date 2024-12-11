@@ -97,8 +97,8 @@ public class VisionCone : MonoBehaviour
 
     public void ChaseSeekStateRange()
     {
-        VisionRange = PatrolVisionRange * 2;
-        VisionAngle = PatrolVisionAngle * 2;
+        VisionRange = PatrolVisionRange;/** 2;*/
+        VisionAngle = PatrolVisionAngle;/** 2;*/
     }
 
     public void PatrolStateRange()

@@ -11,9 +11,10 @@ namespace ComportamientoIA.Runtime.State
 
         public override void OnEnter()
         {
-            this._controller.agent.destination = this._controller.lastPositionPlayer;
+            this._controller.agent.destination = this._controller.player.transform.position;
             this._controller.visionCone.changeColorTo(this._controller.visionCone.SeekColor);
             _controller.visionCone.ChaseSeekStateRange();
+            this._controller.agent.speed = _controller.originalSpeed;
         }
 
         public override void DoState()

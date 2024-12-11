@@ -13,7 +13,6 @@ namespace ComportamientoIA.Runtime.Managers
     {
         public Transform          player;
         public NavMeshAgent       agent;
-        public Vector3            lastPositionPlayer;
         public FiniteStateMachine _finiteStateMachine;
         public VisionCone         visionCone;
         public GameObject[]       waypoints;

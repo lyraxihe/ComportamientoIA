@@ -22,7 +22,6 @@ public class EnemyAudio : MonoBehaviour
     {
         if (other.transform.tag == "PlayerSoundCollider")
         {
-            _controller.lastPositionPlayer = other.transform.position;
             _controller.isHearingPlayer = true;
         }
                 

@@ -12,7 +12,7 @@ namespace ComportamientoIA.Runtime.State
         public override void OnEnter()
         {
             if (this._controller.agent.speed == this._controller.originalSpeed)
-                this._controller.agent.speed += 4;
+                this._controller.agent.speed *= 0.35f;
 
             this._controller.visionCone.changeColorTo(this._controller.visionCone.ChaseColor);
             _controller.visionCone.ChaseSeekStateRange();
@@ -22,7 +22,7 @@ namespace ComportamientoIA.Runtime.State
         {
             _controller.agent.destination = _controller.player.transform.position;
             if (!IsSeeingPlayer() && !IsHearingPlayer())
-                _controller.ChangeStateTo(new PatrolState(_controller._finiteStateMachine, _controller));
+                _controller.ChangeStateTo(new SeekState(_controller._finiteStateMachine, _controller));
         }
     }
 }

@@ -15,7 +15,5 @@ namespace FiniteStateMachineLibrary.States
         public abstract void OnEnter();
 
         public abstract void DoState();
-
-        //public abstract void OnExit();
     }
 }

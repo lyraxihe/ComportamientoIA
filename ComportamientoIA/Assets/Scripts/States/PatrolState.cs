@@ -28,9 +28,11 @@ namespace ComportamientoIA.Runtime.State
 
                 _controller.agent.destination = _controller.waypoints[_controller.currentWaypoint].transform.position;
             }
-            if (IsSeeingPlayer())
+
+            var hasSeenPlayer = IsSeeingPlayer();
+            if (hasSeenPlayer)
                 _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
-            else if (IsHearingPlayer() && !IsSeeingPlayer())
+            else if (IsHearingPlayer() && !hasSeenPlayer)
                 _controller.ChangeStateTo(new SeekState(_controller._finiteStateMachine, _controller));
 
         }
