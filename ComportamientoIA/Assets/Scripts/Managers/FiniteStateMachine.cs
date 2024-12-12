@@ -19,7 +19,6 @@ namespace FiniteStateMachineLibrary.Managers
 
         public void ChangeToState(State state)
         {
-            //this._currentState?.OnExit();
             this._currentState = state;
             this._currentState?.OnEnter();
         }

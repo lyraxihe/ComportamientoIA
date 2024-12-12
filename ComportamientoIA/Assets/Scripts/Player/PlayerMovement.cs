@@ -49,9 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // calculate movement direction
         moveDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
-
         rb.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
     }
 

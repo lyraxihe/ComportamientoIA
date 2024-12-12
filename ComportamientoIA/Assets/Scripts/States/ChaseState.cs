@@ -12,7 +12,7 @@ namespace ComportamientoIA.Runtime.State
         public override void OnEnter()
         {
             if (this._controller.agent.speed == this._controller.originalSpeed)
-                this._controller.agent.speed += 3;
+                this._controller.agent.speed *= 1.3f;
 
             this._controller.visionCone.changeColorTo(this._controller.visionCone.ChaseColor);
             _controller.visionCone.ChaseStateRange();

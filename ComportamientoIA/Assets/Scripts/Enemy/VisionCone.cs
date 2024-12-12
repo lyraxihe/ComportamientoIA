@@ -17,10 +17,9 @@ public class VisionCone : MonoBehaviour
     public float     PatrolVisionRange;
     public float     PatrolVisionAngle;
     public float     VisionRadAngle;
-    public LayerMask VisionObstructingLayer;//layer with objects that obstruct the enemy view, like walls, for example
+    public LayerMask VisionObstructingLayer;
     public int       VisionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the pretier the vision cone will be
 
-    // Conevision colors
     public Color PatrolColor = new Color(1, 1, 1, 0.7f);
     public Color ChaseColor  = new Color(1, 0, 0, 0.7f);
     public Color SeekColor   = new Color(1, 1, 0, 0.7f);
@@ -98,7 +97,7 @@ public class VisionCone : MonoBehaviour
     public void ChaseStateRange()
     {
         VisionRange = PatrolVisionRange * 2;
-        VisionAngle = PatrolVisionAngle * 2;
+        VisionAngle = PatrolVisionAngle * 1.2f;
     }
 
     public void PatrolStateRange()
