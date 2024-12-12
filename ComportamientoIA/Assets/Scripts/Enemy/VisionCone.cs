@@ -36,7 +36,7 @@ public class VisionCone : MonoBehaviour
 
     void Start()
     {
-        _controller = GetComponentInParent<EnemyBehaviour>();
+        _controller    = GetComponentInParent<EnemyBehaviour>();
         
         transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
 
@@ -95,10 +95,10 @@ public class VisionCone : MonoBehaviour
         _MeshRenderer.material.color = color;
     }
 
-    public void ChaseSeekStateRange()
+    public void ChaseStateRange()
     {
-        VisionRange = PatrolVisionRange;/** 2;*/
-        VisionAngle = PatrolVisionAngle;/** 2;*/
+        VisionRange = PatrolVisionRange * 2;
+        VisionAngle = PatrolVisionAngle * 2;
     }
 
     public void PatrolStateRange()

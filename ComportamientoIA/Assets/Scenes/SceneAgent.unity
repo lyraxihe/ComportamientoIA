@@ -661,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5463897796405895204, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_StoppingDistance
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5641379331068370136, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -988,7 +988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524797299}
   - component: {fileID: 524797300}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sound
   m_TagString: PlayerSoundCollider
   m_Icon: {fileID: 0}
@@ -2682,6 +2682,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3002658522677320710, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002658522677320710, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3978933920198694405, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -2724,7 +2732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5463897796405895204, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: m_StoppingDistance
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5641379331068370136, guid: e134e2f96af0e7642a0428889a7ec2fc, type: 3}
       propertyPath: waypoints.Array.data[0]

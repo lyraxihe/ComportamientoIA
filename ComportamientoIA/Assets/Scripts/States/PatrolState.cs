@@ -13,6 +13,7 @@ namespace ComportamientoIA.Runtime.State
         public override void OnEnter()
         {
             this._controller.agent.destination = this._controller.waypoints[this._controller.currentWaypoint].transform.position;
+            
             this._controller.visionCone.changeColorTo(this._controller.visionCone.PatrolColor);
             _controller.visionCone.PatrolStateRange();
         }
@@ -30,6 +31,7 @@ namespace ComportamientoIA.Runtime.State
             }
 
             var hasSeenPlayer = IsSeeingPlayer();
+            
             if (hasSeenPlayer)
                 _controller.ChangeStateTo(new ChaseState(_controller._finiteStateMachine, _controller));
             else if (IsHearingPlayer() && !hasSeenPlayer)

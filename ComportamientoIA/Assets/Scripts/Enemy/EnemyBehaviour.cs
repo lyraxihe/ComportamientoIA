@@ -19,6 +19,7 @@ namespace ComportamientoIA.Runtime.Managers
         public int                currentWaypoint = 0;
         public float              originalSpeed;
         public bool               isHearingPlayer;
+        public float              timeToStopChasing;
 
 
         private void Awake()
@@ -31,6 +32,7 @@ namespace ComportamientoIA.Runtime.Managers
             this._finiteStateMachine = new EnemyFiniteStateMachine(this);
             player                   = GameObject.Find("Player").GetComponent<Transform>();
             originalSpeed            = agent.speed;
+            timeToStopChasing        = 2f;
             
             InvokeRepeating(nameof(UpdateMachine), 0, 0.2f);
         }

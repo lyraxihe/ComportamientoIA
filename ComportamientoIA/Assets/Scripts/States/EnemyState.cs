@@ -19,7 +19,7 @@ namespace ComportamientoIA.Runtime.State
             if (Vector3.Distance(_controller.transform.position, _controller.player.position) > _controller.visionCone.VisionRange)
                 return false;
 
-            var directionToPlayer = (_controller.player.position - _controller.transform.position).normalized;
+            var directionToPlayer       = (_controller.player.position - _controller.transform.position).normalized;
             var angleBetweenEnemyPlayer = Vector3.Angle(_controller.transform.forward, directionToPlayer);
 
             if (angleBetweenEnemyPlayer > (_controller.visionCone.VisionAngle * 0.5))
@@ -28,17 +28,13 @@ namespace ComportamientoIA.Runtime.State
            if (Physics.Raycast(_controller.transform.position, directionToPlayer, out RaycastHit hit, _controller.visionCone.VisionRange, LayerMask.GetMask("Wall", "Player")))
            {
                 var hitedObject = hit.collider.gameObject;
+                
                 if (hitedObject.tag == "Player")
-                {
-                    Debug.Log("ve al jugador");
                     return true;
-                }
                 else
-                {
-                    Debug.Log("no ve al jugador");
                     return false;
-                }
            }
+
            return false;
         }
 
